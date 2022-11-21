@@ -6,6 +6,9 @@ rm -r ./channel-artifacts/
 rm -r ./crypto-config/
 sleep 2s
 
+# Export Hyperledger Fabric tools
+
+export PATH=$PATH:${PWD}/bin
 # Generate artifacts
 cryptogen generate --config=./crypto-config.yaml
 mkdir channel-artifacts
@@ -13,7 +16,6 @@ configtxgen -profile TwoOrgsOrdererGenesis --channelID system-channel -outputBlo
 configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx --channelID channel1
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx --channelID channel1 -asOrg Org1MSP
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx --channelID channel1 -asOrg Org2MSP
-
 sleep 10s
 
 # Up network

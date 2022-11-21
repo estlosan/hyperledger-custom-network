@@ -34,8 +34,12 @@ This is a hyperledger custom network with a set of scripts to generate artifacts
     go get
     cd ./../..
     ```
-3. Modify `crypto-config.yaml` with your custom network values.
-4. Modify `configtx.yaml` with your custom network values.
+3. Export Hyperledger Fabric binaries
+    ```sh
+    export PATH=$PATH:${PWD}/bin
+    ``` 
+4. Modify `crypto-config.yaml` with your custom network values.
+5. Modify `configtx.yaml` with your custom network values.
 
 
 ## ▶️ Creating and running a custom network
