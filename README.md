@@ -8,6 +8,7 @@ This is a hyperledger custom network with a set of scripts to generate artifacts
 - [🛠️ Pre-requisites](#🛠️-prequisites)
 - [👨‍💻 Installation](#👨‍💻-getting-started)
   - [Install Dependencies](#installation)
+- [Usage](#💻usage)
 - [▶️ Creating and running a custom network](#▶️-creating-and-running-a-custom-network)
   - [Preparing the network](#preparing-the-network)  
   - [Generate Hyperledger Fabric key materials](#generate-hyperledger-fabric-key-materials)  
@@ -41,6 +42,20 @@ This is a hyperledger custom network with a set of scripts to generate artifacts
 4. Modify `crypto-config.yaml` with your custom network values.
 5. Modify `configtx.yaml` with your custom network values.
 
+
+## 💻 Usage
+
+```sh
+[*] NORMAL MODE
+./init.sh           # Use cryptogen to generate network crypto materials 
+
+[*] FABRIC-CA MODE
+./init.sh -ca       # Use Certificate Authorities to generate network crypto materials
+
+[*] HELP
+./init.sh -h
+
+```
 
 ## ▶️ Creating and running a custom network
 
