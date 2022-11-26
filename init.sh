@@ -11,9 +11,12 @@ function removePreviousExecution() {
     docker-compose -f docker-compose-ca.yaml down --volumes --remove-orphans 2>/dev/null
 
     # Remove fabric ca artifacts
-    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org1.example.com/ca' 2>/dev/null
-    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org2.example.com/ca' 2>/dev/null
-    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/orderer.example.com/ca' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org1.example.com/ca/*' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org1.example.com/tls.ca/*' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org2.example.com/ca/*' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/org2.example.com/tls.ca/*' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/orderer.example.com/ca/*' 2>/dev/null
+    docker run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf fabric-ca/orderer.example.com/tls.ca/*' 2>/dev/null
     rm -rf ./channel-artifacts/ 2>/dev/null
     rm -rf ./crypto-config/ 2>/dev/null
     sleep 2s
@@ -23,13 +26,9 @@ function generateCryptoMaterials() {
     # Generate crypto materials
     infoln "Generating crypto materials"
     if [ ${CRYPTO_CONFIG} == "CA" ]; then
-        # Up fabric-ca
-        docker-compose -f docker-compose-ca.yaml up -d
-        sleep 5s
         # Generate artifacts using Fabric-ca
-        generateOrg1CryptoMaterials
-        generateOrg2CryptoMaterials
-        generateOrdererCryptoMaterials
+        generateTLSCryptoMaterials
+        generateCaCryptoMaterials
         sleep 5s
 
     elif [ ${CRYPTO_CONFIG} == "Cryptogen" ]; then
