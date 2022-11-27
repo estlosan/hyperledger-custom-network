@@ -1,2 +1,8 @@
 channel-artifacts/
 crypto-config/
+fabric-ca/orderer.example.com/ca
+fabric-ca/orderer.example.com/tls.ca
+fabric-ca/org1.example.com/ca
+fabric-ca/org1.example.com/tls.ca
+fabric-ca/org2.example.com/ca
+fabric-ca/org2.example.com/tls.ca
